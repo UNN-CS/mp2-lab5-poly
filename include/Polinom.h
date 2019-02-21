@@ -1,3 +1,5 @@
+
+
 class TPolinom : public THeadRing {
   public:
     TPolinom ( int monoms[][2]=NULL, int km=0 ); // конструктор

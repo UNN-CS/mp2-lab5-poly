@@ -1,4 +1,14 @@
-class TDatList : {
+#include "DatLink.h"
+
+#define ListOK 0
+#define ListEmpty -101
+#define ListNoMem -102
+#define ListNoPos -103
+
+
+enum  TLinkPos {FIRST, CURRENT, LAST};
+
+class TDatList : public TDatLink {
   protected:
     PTDatLink pFirst;    // первое звено
     PTDatLink pLast;     // последнее звено

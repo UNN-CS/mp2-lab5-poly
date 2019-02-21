@@ -26,3 +26,5 @@ class TMonom : public TDatValue  {     protected:
     }
     friend class TPolinom;
 };
+
+typedef TMonom *PTMonom;
