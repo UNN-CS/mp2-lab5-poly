@@ -14,7 +14,7 @@ public:
   TRootLink(PTRootLink pN = nullptr)
   { pNext = pN; }
 
-  PTRootLink GetNextLink()
+  virtual PTRootLink GetNextLink() const
   { return pNext; }
 
   void SetNextLink(PTRootLink pN)

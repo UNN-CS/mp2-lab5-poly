@@ -15,13 +15,13 @@ public:
     :TRootLink(pN)
   { pValue = pVal; }
 
-  void SetDatValue(PTDatValue pVal)
+  virtual void SetDatValue(PTDatValue pVal) override
   { pValue = pVal; }
 
-  PTDatValue GetDatValue() const
+  virtual PTDatValue GetDatValue() const override
   { return pValue; }
 
-  PTDatLink GetNextLink() const
+  virtual PTDatLink GetNextLink() const override
   { return dynamic_cast<PTDatLink>(pNext); }
 
   friend class TDatList;

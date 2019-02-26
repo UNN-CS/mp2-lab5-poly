@@ -18,7 +18,7 @@ public:
     Coeff = cval;
     Index = ival;
   }
-  virtual TDatValue* GetCopy() const;
+  virtual TDatValue* GetCopy() const override;
   void SetCoeff(int cval);
   int GetCoeff() const;
   void SetIndex(int ival);
