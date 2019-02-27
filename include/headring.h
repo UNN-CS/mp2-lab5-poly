@@ -9,7 +9,7 @@ protected:
   PTDatLink pHead;
 public:
   THeadRing();
-  virtual ~THeadRing();
+  ~THeadRing();
 
   virtual void InsFirst(PTDatValue pVal=nullptr);
   virtual void DelFirst();

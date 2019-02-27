@@ -1,12 +1,11 @@
 #include "../include/headring.h"
 
-THeadRing::THeadRing(): TDatList()
+THeadRing::THeadRing()
 {
-  InsFirst();
+  TDatList::InsFirst();
   pHead = pFirst;
   ListLen = 0;
   pStop = pHead;
-  //*const_cast<PTDatLink*>(&pStop) = pHead;
   Reset();
 }
 

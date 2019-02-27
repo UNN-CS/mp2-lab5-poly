@@ -26,7 +26,7 @@ protected:
   void      DelLink(PTDatLink pLink);
 public:
   TDatList();
-  virtual ~TDatList()
+  ~TDatList()
   { DelList(); }
 
   PTDatValue GetDatValue(TLinkPos mode = CURRENT);
