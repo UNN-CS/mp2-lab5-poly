@@ -127,4 +127,11 @@ TEST(TDatList, get_dat_value)
   EXPECT_EQ(nullptr, l.GetDatValue());
 }
 
+TEST(TDatList, throw_if_del_from_empty)
+{
+  TDatList l;
+
+  EXPECT_ANY_THROW(l.DelFirst());
+}
+
 

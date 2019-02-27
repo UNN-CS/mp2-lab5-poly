@@ -14,7 +14,7 @@ enum TLinkPos {FIRST, CURRENT, LAST};
 class TDatList: public TDataCom
 {
 protected:
-  const PTDatLink pStop;
+  PTDatLink pStop;
   PTDatLink pFirst;
   PTDatLink pLast;
   PTDatLink pCurrLink;

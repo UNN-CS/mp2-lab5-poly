@@ -104,7 +104,7 @@ void TDatList::InsFirst(PTDatValue pVal)
   if(t == nullptr)
   {
     SetRetCode(ListNoMem);
-    throw "ListNoMem";
+    throw ListNoMem;
   }
   else
   {
@@ -134,7 +134,7 @@ void TDatList::InsLast(PTDatValue pVal)
   if(t == nullptr)
   {
     SetRetCode(ListNoMem);
-    throw "ListNoMem";
+    throw ListNoMem;
   }
   else
   {
@@ -168,7 +168,7 @@ void TDatList::InsCurrent(PTDatValue pVal)
   else if(pPrevLink == pStop)
   {
     SetRetCode(ListNoPos);
-    throw "ListNoPos";
+    throw ListNoPos;
   }
   else
   {
@@ -176,7 +176,7 @@ void TDatList::InsCurrent(PTDatValue pVal)
     if(t == nullptr)
     {
       SetRetCode(ListNoMem);
-      throw "ListNoMem";
+      throw ListNoMem;
     }
     else
     {
@@ -193,7 +193,7 @@ void TDatList::DelFirst()
   if(IsEmpty())
   {
     SetRetCode(ListEmpty);
-    throw "ListEmpty";
+    throw ListEmpty;
   }
   else
   {
@@ -229,7 +229,7 @@ void TDatList::DelCurrent()
   if(pCurrLink == pStop)
   {
     SetRetCode(ListNoPos);
-    throw "ListNoPos";
+    throw ListNoPos;
   }
   else if(pCurrLink == pFirst)
   {

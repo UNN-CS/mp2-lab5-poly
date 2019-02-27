@@ -1,19 +1,18 @@
 #include <iostream>
 #include "../include/datlist.h"
+#include "../include/headring.h"
 
 using namespace std;
 
 int main()
 {
-  TDatList l;
-  l.InsFirst();
-  l.InsFirst();
+  THeadRing hr;
 
-  int i = 0;
-  for(l.Reset(); !l.IsListEnded(); l.DelFirst())
-  {
-    cout << i++ << '\n';
-  }
+  //bool s = hr.IsEmpty();
+  //printf("asd\n");
+  cout << "asdasd\n";
+  //cout << ((s == true) ? "true" : "false");
+
 
   return 0;
 }

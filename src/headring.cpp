@@ -2,10 +2,11 @@
 
 THeadRing::THeadRing(): TDatList()
 {
-  InsLast();
+  InsFirst();
   pHead = pFirst;
   ListLen = 0;
-  *const_cast<PTDatLink*>(&pStop) = pHead;
+  pStop = pHead;
+  //*const_cast<PTDatLink*>(&pStop) = pHead;
   Reset();
 }
 
