@@ -18,6 +18,7 @@ public:
     Coeff = cval;
     Index = ival;
   }
+  virtual ~TMonom(){}
   virtual TDatValue* GetCopy() const override;
   void SetCoeff(int cval);
   int GetCoeff() const;

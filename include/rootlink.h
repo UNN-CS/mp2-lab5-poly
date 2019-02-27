@@ -14,7 +14,9 @@ public:
   TRootLink(PTRootLink pN = nullptr)
   { pNext = pN; }
 
-  virtual PTRootLink GetNextLink() const
+  virtual ~TRootLink(){}
+
+  PTRootLink GetNextLink() const
   { return pNext; }
 
   void SetNextLink(PTRootLink pN)
@@ -28,7 +30,7 @@ public:
   }
 
   virtual void       SetDatValue(PTDatValue pVal)=0;
-  virtual PTDatValue GetDatValue() const=0;
+  virtual PTDatValue GetDatValue()=0;
 
   friend class TDatList;
 };

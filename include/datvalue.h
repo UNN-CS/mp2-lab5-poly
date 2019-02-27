@@ -8,7 +8,7 @@ class TDatValue
 {
 public:
   virtual TDatValue* GetCopy() const=0;
-  ~TDatValue(){}
+  virtual ~TDatValue(){}
 };
 
 #endif
