@@ -5,7 +5,14 @@
 
 class THeadRing: public TDatList
 {
+protected:
+  PTDatLink pHead;
+public:
+  THeadRing();
+  virtual ~THeadRing();
 
+  virtual void InsFirst(PTDatValue pVal=nullptr);
+  virtual void DelFirst();
 };
 
 #endif
