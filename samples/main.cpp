@@ -1,16 +1,15 @@
 #include <iostream>
-#include "../include/headring.h"
+#include "../include/polinom.h"
 
 using namespace std;
 
 int main()
 {
-  THeadRing hr;
-  //TDatList l;
-  //bool s = hr.IsEmpty();
-  //printf("asd\n");
-  cout << "asdasd" << endl;
-  //cout << ((s == true) ? "true" : "false");
+  TPolinom p;
+  
+  cin >> p;
+
+  cout << p;
 
   return 0;
 }

@@ -44,7 +44,8 @@ public:
   }
 
   friend class TPolinom;
-  friend std::ostream& operator<<(std::ostream& output, const TMonom& q);
+  friend std::ostream& operator<<(std::ostream &output, const TMonom& q);
+  friend std::istream& operator>>(std::istream &input, TMonom &q);
 };
 
 #endif

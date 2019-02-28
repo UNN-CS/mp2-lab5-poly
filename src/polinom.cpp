@@ -1,5 +1,6 @@
 #include <string>
 #include "../include/polinom.h"
+#include "../include/monom.h"
 
 void sortm(int monoms[][2], int km)
 {
@@ -119,7 +120,20 @@ std::ostream& operator<<(std::ostream &output, TPolinom &q)
 
 std::istream& operator>>(std::istream &input, TPolinom &q)
 {
-  q.GetMonom();
+  TMonom m;
+  int sz;
+  input >> sz;
+  int (*monoms)[2] = new int[sz][2];
+  for(int i = 0; i < sz; ++i)
+  {
+    input >> m;
+    monoms[i][0] = m.GetCoeff();
+    monoms[i][1] = m.GetIndex();
+  }
+
+  TPolinom p(monoms, sz);
+  q = p;
+
   return input;
 }
 

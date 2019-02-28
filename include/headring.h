@@ -11,8 +11,8 @@ public:
   THeadRing();
   virtual ~THeadRing();
 
-  virtual void InsFirst(PTDatValue pVal=nullptr) override;
-  virtual void DelFirst() override;
+  virtual void InsFirst(PTDatValue pVal=nullptr);
+  virtual void DelFirst();
 };
 
 #endif

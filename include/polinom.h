@@ -17,7 +17,7 @@ public:
   TPolinom& operator=(TPolinom &q);
 
   friend std::ostream& operator<<(std::ostream& output, TPolinom& q);
-  friend std::istream& operator>>(std::istream& input,  TPolinom& q);
+  friend std::istream& operator>>(std::istream& input, TPolinom& q);
 };
 
 

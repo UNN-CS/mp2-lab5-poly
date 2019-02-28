@@ -52,5 +52,24 @@ std::ostream& operator<<(std::ostream& output, const TMonom& q)
   return output;
 }
 
+std::istream& operator>>(std::istream& input, TMonom& q)
+{
+  int X, Y, Z;
+
+  input >> q.Coeff;
+  input >> X;
+  input >> Y;
+  input >> Z;
+
+  if(   X > 9 || X < 0
+     || Y > 9 || Y < 0
+     || Z > 9 || Z < 0)
+    throw -1;
+
+  q.Index = 100*X + 10*Y + Z;
+
+  return input;
+}
+
 
 
