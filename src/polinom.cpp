@@ -1,16 +1,38 @@
 #include <string>
 #include "../include/polinom.h"
 
+void sortm(int monoms[][2], int km)
+{
+  for(int i = 0; i < km - 1; ++i)
+    for(int j = km - 1; j > i; --j)
+    {
+      if(monoms[j][1] < monoms[j - 1][1])
+      {
+        int ctmp = monoms[j][0],
+            itmp = monoms[j][1];
+        monoms[j][0] = monoms[j - 1][0];
+        monoms[j][1] = monoms[j - 1][1];
+        monoms[j - 1][0] = ctmp;
+        monoms[j - 1][1] = itmp;
+      }
+    }
+}
+
 TPolinom::TPolinom(int monoms[][2], int km): THeadRing()
 {
   PTMonom pMonom = new TMonom(0, -1);
   pHead->SetDatValue(pMonom);
+  sortm(monoms, km);
+
   for(int i = 0; i < km; ++i)
   {
     if(monoms[i][1] < 0)
       throw -1;
-    pMonom = new TMonom(monoms[i][0], monoms[i][1]);
-    InsLast(pMonom);
+    if(monoms[i][0] != 0)
+    {
+      pMonom = new TMonom(monoms[i][0], monoms[i][1]);
+      InsLast(pMonom);
+    }
   }
 }
 
@@ -29,7 +51,6 @@ TPolinom& TPolinom::operator=(TPolinom& q)
   if(this == &q)
     return *this;
 
-  TPolinom& q = const_cast<TPolinom&>(q);
   int pos = q.GetCurrentPos();
 
   DelList();

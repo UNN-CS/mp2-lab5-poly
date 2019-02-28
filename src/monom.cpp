@@ -25,7 +25,7 @@ int TMonom::GetIndex() const
   return Index;
 }
 
-std::ostream& operator<<(std::ostream& output, TMonom& q)
+std::ostream& operator<<(std::ostream& output, const TMonom& q)
 {
   int index = q.GetIndex();
   int X = index / 100,
@@ -37,11 +37,17 @@ std::ostream& operator<<(std::ostream& output, TMonom& q)
 
   output << q.GetCoeff();
   if(X != 0)
-    output << "X^" << X;
+    output << "X";
+    if(X != 1)
+      output << "^" << X;
   if(Y != 0)
-    output << "Y^" << Y;
+    output << "Y";
+    if(Y != 1)
+      output << "^" << Y;
   if(Z != 0)
-    output << "Z^" << Z;
+    output << "Z";
+    if(Z != 1)
+      output << "^" << Z;
 
   return output;
 }
