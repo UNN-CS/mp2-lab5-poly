@@ -1,7 +1,11 @@
 #ifndef __MONOM_H__
 #define __MONOM_H__
 
+#include <iostream>
 #include "datvalue.h"
+
+class TMonom;
+typedef TMonom *PTMonom;
 
 class TMonom: public TDatValue
 {
@@ -40,6 +44,7 @@ public:
   }
 
   friend class TPolinom;
+  friend std::ostream& operator<<(std::ostream& output, const TMonom& q);
 };
 
 #endif
