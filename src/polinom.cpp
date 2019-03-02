@@ -118,6 +118,28 @@ TPolinom& TPolinom::operator+=(TPolinom& q)
   return *this;
 }
 
+void TPolinom::InsMonom(PTMonom qm)
+{
+  PTMonom pm;
+
+  for(Reset(); !IsListEnded(); GoNext())
+  {
+    pm = GetMonom();
+    if(*pm == *qm)
+    {
+      pm->Coeff += qm->Coeff;
+      return;
+    }
+    else if(*pm < *qm)
+    {
+      InsCurrent(qm);
+      return;
+    }
+  }
+
+  InsLast(qm);
+}
+
 std::ostream& operator<<(std::ostream &output, TPolinom &q)
 {
   PTMonom pMonom = nullptr;
@@ -135,6 +157,18 @@ std::istream& operator>>(std::istream &input, TPolinom &q)
   q.DelList();
 
   TMonom m;
+  int cval, ival;
+
+  while(true)
+  {
+    input >> cval;
+    input >> ival;
+
+    if(ival == -1)
+      break;
+    else if(cval != 0)
+      q.InsMonom(new TMonom(cval, ival));
+  }
 
   while(true)
   {

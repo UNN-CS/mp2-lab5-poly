@@ -8,9 +8,9 @@ int main()
   TPolinom p;
   TMonom m;
 
-  cin >> p;
+  cin >> m;
 
-  cout << p << endl;
+  cout << m << endl;
 
   return 0;
 }

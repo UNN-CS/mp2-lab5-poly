@@ -10,8 +10,11 @@ class TPolinom: public THeadRing
 public:
   TPolinom(int monoms[][2]=nullptr, int km=0);
   TPolinom(TPolinom &q);
+
   PTMonom GetMonom()
   { return dynamic_cast<PTMonom>(GetDatValue()); }
+
+  void InsMonom(PTMonom p);
 
   TPolinom& operator+=(TPolinom &q);
   TPolinom& operator=(TPolinom &q);

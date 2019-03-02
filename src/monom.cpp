@@ -27,18 +27,21 @@ int TMonom::GetIndex() const
 
 std::ostream& operator<<(std::ostream& output, const TMonom& q)
 {
-  int index = q.GetIndex();
+  int index = q.GetIndex(),
+      coeff = q.GetCoeff();
 
-  if(q.GetCoeff() > 0)
-    output << '+';
 
-  output << q.GetCoeff();
+  if(coeff != -1 && coeff != 1)
+  {
+    output << std::showpos << coeff;
+    if(index != 0)
+      output << '*';
+  }
   if(index != 0)
   {
     int X = index / 100,
         Y = (index % 100) / 10,
         Z = index % 10;
-    output << '*';
     if(X != 0)
     {
       output << "X";

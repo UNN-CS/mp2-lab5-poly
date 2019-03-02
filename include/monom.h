@@ -35,13 +35,13 @@ public:
     return *this;
   }
   bool operator==(const TMonom &tm) const
-  {
-    return Coeff == tm.Coeff && Index == tm.Index;
-  }
+  { return Coeff == tm.Coeff && Index == tm.Index; }
+
   bool operator<(const TMonom &tm) const
-  {
-    return Index == tm.Index ? Coeff < tm.Coeff : Index < tm.Index;
-  }
+  { return Index == tm.Index ? Coeff < tm.Coeff : Index < tm.Index; }
+
+  bool operator<=(const TMonom &tm) const
+  { return operator<(tm) || operator==(tm); }
 
   friend class TPolinom;
   friend std::ostream& operator<<(std::ostream &output, const TMonom& q);

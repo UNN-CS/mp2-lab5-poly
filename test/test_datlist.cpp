@@ -73,6 +73,8 @@ TEST(TDatList, del_list)
   l->InsFirst();
   l->InsFirst();
 
+  EXPECT_NO_THROW(l->DelList());
+  EXPECT_TRUE(l->IsEmpty());
   EXPECT_NO_THROW(delete l);
 }
 
