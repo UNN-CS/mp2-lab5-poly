@@ -28,45 +28,61 @@ int TMonom::GetIndex() const
 std::ostream& operator<<(std::ostream& output, const TMonom& q)
 {
   int index = q.GetIndex();
-  int X = index / 100,
-      Y = (index % 100) / 10,
-      Z = index % 10;
 
   if(q.GetCoeff() > 0)
     output << '+';
 
   output << q.GetCoeff();
-  if(X != 0)
-    output << "X";
-    if(X != 1)
-      output << "^" << X;
-  if(Y != 0)
-    output << "Y";
-    if(Y != 1)
-      output << "^" << Y;
-  if(Z != 0)
-    output << "Z";
-    if(Z != 1)
-      output << "^" << Z;
+  if(index != 0)
+  {
+    int X = index / 100,
+        Y = (index % 100) / 10,
+        Z = index % 10;
+    output << '*';
+    if(X != 0)
+    {
+      output << "X";
+      if(X != 1)
+        output << "^" << X;
+    }
+    if(Y != 0)
+    {
+      output << "Y";
+      if(Y != 1)
+        output << "^" << Y;
+    }
+    if(Z != 0)
+    {
+      output << "Z";
+      if(Z != 1)
+        output << "^" << Z;
+    }
+  }
 
   return output;
 }
 
 std::istream& operator>>(std::istream& input, TMonom& q)
 {
-  int X, Y, Z;
+  int ival, cval;
 
-  input >> q.Coeff;
-  input >> X;
-  input >> Y;
-  input >> Z;
+  input >> cval;
+  input >> ival;
 
-  if(   X > 9 || X < 0
-     || Y > 9 || Y < 0
-     || Z > 9 || Z < 0)
+  if(ival == -1)
+  {
+    q.Index = -1;
+    q.Coeff = 0;
+  }
+  else if(ival <= 999 && ival >= 0)
+  {
+    q.Index = ival;
+    q.Coeff = cval;
+  }
+  else
+  {
     throw -1;
-
-  q.Index = 100*X + 10*Y + Z;
+  }
 
   return input;
 }

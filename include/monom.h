@@ -40,7 +40,7 @@ public:
   }
   bool operator<(const TMonom &tm) const
   {
-    return Index < tm.Index;
+    return Index == tm.Index ? Coeff < tm.Coeff : Index < tm.Index;
   }
 
   friend class TPolinom;

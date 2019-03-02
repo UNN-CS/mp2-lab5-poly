@@ -7,7 +7,19 @@ void sortm(int monoms[][2], int km)
   for(int i = 0; i < km - 1; ++i)
     for(int j = km - 1; j > i; --j)
     {
-      if(monoms[j][1] < monoms[j - 1][1])
+      if (monoms[j][1] == monoms[j - 1][1])
+      {
+        if (monoms[j][0] < monoms[j - 1][0])
+        {
+          int ctmp = monoms[j][0],
+              itmp = monoms[j][1];
+          monoms[j][0] = monoms[j - 1][0];
+          monoms[j][1] = monoms[j - 1][1];
+          monoms[j - 1][0] = ctmp;
+          monoms[j - 1][1] = itmp;
+        }
+      }
+      else if(monoms[j][1] < monoms[j - 1][1])
       {
         int ctmp = monoms[j][0],
             itmp = monoms[j][1];
@@ -75,13 +87,13 @@ TPolinom& TPolinom::operator+=(TPolinom& q)
   {
     pm = GetMonom();
     qm = q.GetMonom();
-    if(pm->Index < qm->Index)
+    if(*pm < *qm)
     {
       rm = new TMonom(qm->Coeff, qm->Index);
       InsCurrent(rm);
       q.GoNext();
     }
-    else if(pm->Index > qm->Index)
+    else if(*qm < *pm)
     {
       GoNext();
     }
@@ -120,19 +132,18 @@ std::ostream& operator<<(std::ostream &output, TPolinom &q)
 
 std::istream& operator>>(std::istream &input, TPolinom &q)
 {
+  q.DelList();
+
   TMonom m;
-  int sz;
-  input >> sz;
-  int (*monoms)[2] = new int[sz][2];
-  for(int i = 0; i < sz; ++i)
+
+  while(true)
   {
     input >> m;
-    monoms[i][0] = m.GetCoeff();
-    monoms[i][1] = m.GetIndex();
+    if(m.GetIndex() == -1)
+      break;
+    else if(m.GetCoeff() != 0)
+      q.InsLast(m.GetCopy());
   }
-
-  TPolinom p(monoms, sz);
-  q = p;
 
   return input;
 }

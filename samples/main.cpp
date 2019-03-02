@@ -6,10 +6,11 @@ using namespace std;
 int main()
 {
   TPolinom p;
-  
+  TMonom m;
+
   cin >> p;
 
-  cout << p;
+  cout << p << endl;
 
   return 0;
 }
