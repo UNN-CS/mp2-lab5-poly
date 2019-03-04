@@ -34,6 +34,10 @@ std::ostream& operator<<(std::ostream& output, const TMonom& q)
       Z = index % 10;
 
 
+  if(coeff == 0)
+  {
+    output << 0;
+  }
   if(index == 0)
   {
     output << std::showpos << coeff << std::noshowpos;

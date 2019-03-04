@@ -133,6 +133,11 @@ TPolinom& TPolinom::operator+=(TPolinom& q)
 
 std::ostream& operator<<(std::ostream &output, TPolinom &q)
 {
+  if(q.IsEmpty())
+  {
+    output << 0;
+    return output;
+  }
   PTMonom pMonom = nullptr;
   for(q.Reset(); !q.IsListEnded(); q.GoNext())
   {
