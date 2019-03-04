@@ -4,31 +4,23 @@
 
 void sortm(int monoms[][2], int km)
 {
+  int ctmp, itmp;
   for(int i = 0; i < km - 1; ++i)
     for(int j = km - 1; j > i; --j)
     {
-      if (monoms[j][1] == monoms[j - 1][1])
+      if(monoms[j][1] > monoms[j - 1][1])
       {
-        if (monoms[j][0] < monoms[j - 1][0])
-        {
-          int ctmp = monoms[j][0],
-              itmp = monoms[j][1];
-          monoms[j][0] = monoms[j - 1][0];
-          monoms[j][1] = monoms[j - 1][1];
-          monoms[j - 1][0] = ctmp;
-          monoms[j - 1][1] = itmp;
-        }
-      }
-      else if(monoms[j][1] < monoms[j - 1][1])
-      {
-        int ctmp = monoms[j][0],
-            itmp = monoms[j][1];
+        ctmp = monoms[j][0];
+        itmp = monoms[j][1];
         monoms[j][0] = monoms[j - 1][0];
         monoms[j][1] = monoms[j - 1][1];
         monoms[j - 1][0] = ctmp;
         monoms[j - 1][1] = itmp;
       }
     }
+
+
+  //add monoms with same index
   for(int i = 0; i < km - 1; ++i)
   {
     if(monoms[i][1] == monoms[i + 1][1])
@@ -100,13 +92,14 @@ TPolinom& TPolinom::operator+=(TPolinom& q)
   {
     pm = GetMonom();
     qm = q.GetMonom();
-    if(*pm < *qm)
+
+    if(pm->Index < qm->Index)
     {
       rm = new TMonom(qm->Coeff, qm->Index);
       InsCurrent(rm);
       q.GoNext();
     }
-    else if(*qm < *pm)
+    else if(qm->Index < pm->Index)
     {
       GoNext();
     }
@@ -114,17 +107,12 @@ TPolinom& TPolinom::operator+=(TPolinom& q)
     {
       if(pm->Index == -1)
         break;
-      pm->Coeff += qm->GetCoeff();
+      pm->Coeff += qm->Coeff;
       if(pm->Coeff != 0)
-      {
         GoNext();
-        q.GoNext();
-      }
       else
-      {
         DelCurrent();
-        q.GoNext();
-      }
+      q.GoNext();
     }
   }
 
