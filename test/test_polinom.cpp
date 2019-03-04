@@ -37,35 +37,4 @@ TEST(TPolinom, print_non_empty)
   std::cout << "|->\n";
 }
 
-TEST(TPolinom, insert_monom)
-{
-  int monoms[][2] = {{-1, 246},
-                     { 3, 245},
-                     { 2, 234},
-                     { 0, 999},
-                     { 1, 123}};
-  TPolinom p(monoms, 5);
-  PTMonom pm = new TMonom(-10, 235);
-
-  EXPECT_NO_THROW(p.InsMonom(pm));
-  EXPECT_EQ(2, p.GetCurrentPos());
-}
-
-TEST(TPolinom, insert_monom_last)
-{
-  int monoms[][2] = {{-1, 246},
-                     { 3, 245},
-                     { 2, 234},
-                     { 0, 999},
-                     { 1, 123}};
-  TPolinom p(monoms, 5);
-  PTMonom pm = new TMonom(-10, 246);
-
-  std::cout << *pm << std::endl;
-
-  EXPECT_NO_THROW(p.InsMonom(pm));
-  p.SetCurrentPos(3);
-  std::cout << *p.GetMonom() << std::endl;
-  EXPECT_EQ(*pm, *p.GetMonom());
-}
 

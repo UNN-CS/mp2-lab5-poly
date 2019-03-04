@@ -29,6 +29,19 @@ void sortm(int monoms[][2], int km)
         monoms[j - 1][1] = itmp;
       }
     }
+  for(int i = 0; i < km - 1; ++i)
+  {
+    if(monoms[i][1] == monoms[i + 1][1])
+    {
+      int j;
+      for(j = i + 1; monoms[i][1] == monoms[j][1]; ++j)
+      {
+        monoms[i][0] += monoms[j][0];
+        monoms[j][0] = 0;
+      }
+      i = j - 1;
+    }
+  }
 }
 
 TPolinom::TPolinom(int monoms[][2], int km): THeadRing()
@@ -118,28 +131,6 @@ TPolinom& TPolinom::operator+=(TPolinom& q)
   return *this;
 }
 
-void TPolinom::InsMonom(PTMonom qm)
-{
-  PTMonom pm;
-
-  for(Reset(); !IsListEnded(); GoNext())
-  {
-    pm = GetMonom();
-    if(*pm == *qm)
-    {
-      pm->Coeff += qm->Coeff;
-      return;
-    }
-    else if(*pm < *qm)
-    {
-      InsCurrent(qm);
-      return;
-    }
-  }
-
-  InsLast(qm);
-}
-
 std::ostream& operator<<(std::ostream &output, TPolinom &q)
 {
   PTMonom pMonom = nullptr;
@@ -159,6 +150,10 @@ std::istream& operator>>(std::istream &input, TPolinom &q)
   TMonom m;
   int cval, ival;
 
+  int (*buf)[2] = new int[8][2],
+      km = 0,
+      sz = 8;
+
   while(true)
   {
     input >> cval;
@@ -166,19 +161,30 @@ std::istream& operator>>(std::istream &input, TPolinom &q)
 
     if(ival == -1)
       break;
-    else if(cval != 0)
-      q.InsMonom(new TMonom(cval, ival));
+    else
+    {
+      buf[km][0] = cval;
+      buf[km][1] = ival;
+      ++km;
+      if(km == sz)
+      {
+        int (*tmp)[2] = new int[sz * 2][2];
+        for(int i = 0; i < sz; ++i)
+        {
+          tmp[i][0] = buf[i][0];
+          tmp[i][1] = buf[i][1];
+        }
+        sz *= 2;
+        delete[] buf;
+        buf = tmp;
+      }
+    }
   }
 
-  while(true)
-  {
-    input >> m;
-    if(m.GetIndex() == -1)
-      break;
-    else if(m.GetCoeff() != 0)
-      q.InsLast(m.GetCopy());
-  }
+  TPolinom poly(buf, km);
+  q = poly;
 
+  delete[] buf;
   return input;
 }
 

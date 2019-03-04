@@ -29,19 +29,24 @@ std::ostream& operator<<(std::ostream& output, const TMonom& q)
 {
   int index = q.GetIndex(),
       coeff = q.GetCoeff();
+  int X = index / 100,
+      Y = (index % 100) / 10,
+      Z = index % 10;
 
 
-  if(coeff != -1 && coeff != 1)
+  if(index == 0)
   {
-    output << std::showpos << coeff;
-    if(index != 0)
-      output << '*';
+    output << std::showpos << coeff << std::noshowpos;
   }
-  if(index != 0)
+  else
   {
-    int X = index / 100,
-        Y = (index % 100) / 10,
-        Z = index % 10;
+    if(coeff == 1)
+      output << '+';
+    else if(coeff == -1)
+      output << '-';
+    else
+      output << std::showpos << coeff << '*' << std::noshowpos;
+
     if(X != 0)
     {
       output << "X";
