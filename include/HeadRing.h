@@ -1,13 +1,18 @@
+п»ї#ifndef __THEADRING_H__
+#define __THEADRING_H__
+
 #include "DatList.h"
 
-class THeadRing : public TDatList{
-  protected:
-    PTDatLink pHead;     // заголовок, pFirst - после за pHead
-  public:
-    THeadRing ();
-   ~THeadRing ();
-   // вставка звеньев
-    virtual void InsFirst( PTDatValue pVal=NULL ); // после заголовка
-    // удаление звеньев
-    virtual void DelFirst( void );                 // удалить первое звено
+class THeadRing : public TDatList {
+protected:
+	PTDatLink pHead;     // Г§Г ГЈГ®Г«Г®ГўГ®ГЄ, pFirst - Г§ГўГҐГ­Г® Г§Г  pHead
+public:
+	THeadRing();
+	~THeadRing();
+	// ГўГ±ГІГ ГўГЄГ  Г§ГўГҐГ­ГјГҐГў
+	virtual void InsFirst(PTDatValue pVal = NULL); // ГЇГ®Г±Г«ГҐ Г§Г ГЈГ®Г«Г®ГўГЄГ 
+												   // ГіГ¤Г Г«ГҐГ­ГЁГҐ Г§ГўГҐГ­ГјГҐГў
+	virtual void DelFirst();                 // ГіГ¤Г Г«ГЁГІГј ГЇГҐГ°ГўГ®ГҐ Г§ГўГҐГ­Г®
 };
+
+#endif // __THEADRING_H__

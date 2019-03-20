@@ -1,22 +1,27 @@
+ï»¿#ifndef __ROOTLINK_H__
+#define __ROOTLINK_H__
+
+#include <iostream>
 #include "TDatValue.h"
-#include "iostream"
 
 class TRootLink;
 typedef TRootLink *PTRootLink;
 
 class TRootLink {
 protected:
-	PTRootLink  pNext;  // óêàçàòåëü íà ñëåäóþùåå çâåíî
+	PTRootLink  pNext;  // Ã³ÃªÃ Ã§Ã Ã²Ã¥Ã«Ã¼ Ã­Ã  Ã±Ã«Ã¥Ã¤Ã³Ã¾Ã¹Ã¥Ã¥ Ã§Ã¢Ã¥Ã­Ã®
 public:
-	TRootLink(PTRootLink pN = nullptr) { pNext = pN; }
+	TRootLink(PTRootLink pN = NULL) { pNext = pN; }
 	PTRootLink  GetNextLink() { return  pNext; }
 	void SetNextLink(PTRootLink  pLink) { pNext = pLink; }
 	void InsNextLink(PTRootLink  pLink) {
 		PTRootLink p = pNext;  pNext = pLink;
-		if (pLink != nullptr) pLink->pNext = p;
+		if (pLink != NULL) pLink->pNext = p;
 	}
 	virtual void       SetDatValue(PTDatValue pVal) = 0;
 	virtual PTDatValue GetDatValue() = 0;
 
 	friend class TDatList;
 };
+
+#endif // __ROOTLINK_H__

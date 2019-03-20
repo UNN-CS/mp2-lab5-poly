@@ -1,13 +1,23 @@
-#include <iostream>
+п»ї
+#ifndef __TPOLINOM_H__
+#define __TPOLINOM_H__
+
+#include "HeadRing.h"
 #include "Monom.h"
-#include "HeadRing.h" 
+#include <iostream>
+
+#define PolinomWrongIndex -104
 
 class TPolinom : public THeadRing {
-  public:
-    TPolinom ( int monoms[][2]=NULL, int km=0 ); // конструктор
-	TPolinom(TPolinom &q); // полинома из массива «коэффициент-индекс»
-    PTMonom  GetMonom()  { return (PTMonom)GetDatValue(); }
-    TPolinom & operator+( TPolinom &q); // сложение полиномов
-    TPolinom & operator=( TPolinom &q); // присваивание
+public:
+	TPolinom(int monoms[][2] = NULL, int km = 0); // ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
+												  // ГЇГ®Г«ГЁГ­Г®Г¬Г  ГЁГ§ Г¬Г Г±Г±ГЁГўГ  В«ГЄГ®ГЅГґГґГЁГ¶ГЁГҐГ­ГІ-ГЁГ­Г¤ГҐГЄГ±В»
+	TPolinom(TPolinom &q);      // ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЄГ®ГЇГЁГ°Г®ГўГ Г­ГЁГї
+	TPolinom(const TPolinom &q);
+	PTMonom  GetMonom() { return (PTMonom)GetDatValue(); }
+	TPolinom & operator+(TPolinom &q);
+	TPolinom & operator=(TPolinom &q); // ГЇГ°ГЁГ±ГўГ ГЁГўГ Г­ГЁГҐ
 	friend std::ostream& operator<<(std::ostream& out, TPolinom& p);
 };
+
+#endif // __TPOLINOM_H__

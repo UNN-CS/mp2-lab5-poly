@@ -1,16 +1,15 @@
-#ifndef __DATVALUE_H__
+п»ї#ifndef __DATVALUE_H__
 #define __DATVALUE_H__
 
 #include <iostream>
 
 class TDatValue {
-  public:
-    virtual TDatValue * GetCopy() =0; // создание копии
-   ~TDatValue() {}
+public:
+	virtual TDatValue* GetCopy() = 0; // Г±Г®Г§Г¤Г Г­ГЁГҐ ГЄГ®ГЇГЁГЁ
+	~TDatValue() {}
 };
 
-typedef TDatValue *PTDatValue;
+typedef TDatValue* PTDatValue;
 
 
-
-#endif
+#endif // __DATVALUE_H__
