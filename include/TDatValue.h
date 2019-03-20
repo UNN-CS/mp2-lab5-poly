@@ -1,4 +1,7 @@
-#include <iostream.h>
+#ifndef __DATVALUE_H__
+#define __DATVALUE_H__
+
+#include <iostream>
 
 class TDatValue {
   public:
@@ -7,3 +10,7 @@ class TDatValue {
 };
 
 typedef TDatValue *PTDatValue;
+
+
+
+#endif

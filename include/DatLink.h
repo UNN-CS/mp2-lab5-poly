@@ -1,14 +1,17 @@
 #include "RootLink.h"
+#include "TDatValue.h"
+#include <iostream>
 
 class TDatLink;
 typedef TDatLink *PTDatLink;
 
-class TDatLink : public TRootLink {
+class TDatLink : public TRootLink
+{
   protected:
     PTDatValue pValue;  // указатель на объект значения
   public:
-    TDatLink ( PTDatValue pVal = NULL, PTRootLink pN = NULL ) :
-      TRootLink(pN) {
+    TDatLink ( PTDatValue pVal = NULL, PTRootLink pN = NULL ) : TRootLink(pN)
+	{
       pValue = pVal;
     }
     void       SetDatValue ( PTDatValue pVal ) { pValue = pVal; }

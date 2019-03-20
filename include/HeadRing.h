@@ -2,7 +2,7 @@
 
 class THeadRing : public TDatList{
   protected:
-    PTDatLink pHead;     // заголовок, pFirst - звено за pHead
+    PTDatLink pHead;     // заголовок, pFirst - после за pHead
   public:
     THeadRing ();
    ~THeadRing ();

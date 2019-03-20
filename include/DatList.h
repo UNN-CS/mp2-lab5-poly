@@ -43,3 +43,4 @@ class TDatList : public TDatLink {
     virtual void DelCurrent( void );    // удалить текущее звено 
     virtual void DelList   ( void );    // удалить весь список
 };
+

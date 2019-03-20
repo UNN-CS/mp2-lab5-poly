@@ -1,0 +1,12 @@
+﻿  Building Custom Rule D:/Учеба/mp2-lab5-poly/src/CMakeLists.txt
+  CMake does not need to re-run because D:/╨г╤З╨╡╨▒╨░/mp2-lab5-poly/src/CMakeFiles/generate.stamp is up-to-date.
+  DatList.cpp
+D:\Учеба\mp2-lab5-poly\src\DatList.cpp(78): error C2440: =: невозможно преобразовать "PTRootLink" в "PTDatLink"
+  D:\Учеба\mp2-lab5-poly\src\DatList.cpp(78): note: Для приведения базового класса к производному требуется dynamic_cast или static_cast
+D:\Учеба\mp2-lab5-poly\src\DatList.cpp(166): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+D:\Учеба\mp2-lab5-poly\src\DatList.cpp(168): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+  HeadRing.cpp
+  Monom.cpp
+  Polinom.cpp
+  Создание кода...
+d:\учеба\mp2-lab5-poly\src\polinom.cpp(93): warning C4172: возвращение адреса локальной или временной переменной : tmp

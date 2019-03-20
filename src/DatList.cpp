@@ -2,11 +2,11 @@
 
 TDatList::TDatList()
 {
-	pFirst = pLast = pStop = NULL;
-	ListLen = 0;
+	pFirst = pLast = pStop = pPrevLink = pCurrLink = NULL;
+	ListLen = 0, CurrPos = -1;
 }
 
-PTDatLink TDatList::GetLink(PTDatValue pVal = NULL, PTDatLink pLink = NULL)
+PTDatLink TDatList::GetLink(PTDatValue pVal, PTDatLink pLink)
 {
 	PTDatLink tmp = new TDatLink(pVal, pLink);
 	return tmp;
