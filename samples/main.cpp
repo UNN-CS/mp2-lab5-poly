@@ -1,5 +1,5 @@
 #include <iostream>
-#include "C:/Users/DDD/Desktop/Labs/mp2-lab5-poly-master/include/Polinom.h"
+#include "Polinom.h"
 
 using namespace std;
 
