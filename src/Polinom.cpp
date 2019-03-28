@@ -119,14 +119,13 @@ bool  TPolinom::operator==(TPolinom &q)
 TPolinom & TPolinom::operator=(TPolinom &q) // ïðèñâàèâàíèå
 {
 	DelList();
-
-	q.Reset();
-	while (q.IsListEnded())
+	
+	for(q.Reset(); !q.IsLstEnded(); q.GoNext() )
 	{
-		PTMonom tmp = q.GetMonom();
-		InsLast(tmp->GetCopy());
-		q.GoNext();
+	    PTmonom pMonom = q.GetMonom();
+	    InsLast(pMonom->GetCopy());
 	}
+	
 	return *this;
 }
 
