@@ -120,9 +120,9 @@ TPolinom & TPolinom::operator=(TPolinom &q) // ïðèñâàèâàíèå
 {
 	DelList();
 	
-	for(q.Reset(); !q.IsLstEnded(); q.GoNext() )
+	for(q.Reset(); !q.IsListEnded(); q.GoNext())
 	{
-	    PTmonom pMonom = q.GetMonom();
+	    PTMonom pMonom = q.GetMonom();
 	    InsLast(pMonom->GetCopy());
 	}
 	
