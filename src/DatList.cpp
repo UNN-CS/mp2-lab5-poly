@@ -75,7 +75,7 @@ int TDatList::Reset()
 int TDatList::GoNext()
 {
 	pPrevLink = pCurrLink;
-	pCurrLink = pCurrLink->GetNextLink(); ////
+	pCurrLink = pCurrLink->GetNextDatLink(); ////
 	CurrPos++;
 	return 0;
 }
