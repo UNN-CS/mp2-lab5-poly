@@ -1,5 +1,6 @@
 #include <iostream>
-#include "polinom.h"
+#include "Polinom.h"
+
 using namespace std;
 
 int main() {
