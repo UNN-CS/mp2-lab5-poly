@@ -29,3 +29,12 @@
 *.exe
 *.out
 *.app
+
+#
+CMakeCache.txt
+CMakeFiles/
+Makefile
+bin/
+cmake_install.cmake
+
+
