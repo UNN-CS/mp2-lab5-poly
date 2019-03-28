@@ -26,7 +26,7 @@ TPolinom::TPolinom(TPolinom &q)
 	}
 }
 
-TPolinom& TPolinom::operator+(TPolinom &q) // сложение полиномов
+TPolinom TPolinom::operator+(TPolinom &q) // Г±Г«Г®Г¦ГҐГ­ГЁГҐ ГЇГ®Г«ГЁГ­Г®Г¬Г®Гў
 {
 	TPolinom tmp = TPolinom();
 	PTMonom lm, rm, tmpM;
@@ -116,7 +116,7 @@ bool  TPolinom::operator==(TPolinom &q)
     }
 }
 
-TPolinom & TPolinom::operator=(TPolinom &q) // присваивание
+TPolinom & TPolinom::operator=(TPolinom &q) // ГЇГ°ГЁГ±ГўГ ГЁГўГ Г­ГЁГҐ
 {
 	DelList();
 
