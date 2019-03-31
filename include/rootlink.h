@@ -5,7 +5,7 @@ typedef TRootLink *PTRootLink;
 
 class TRootLink {
 protected:
-	PTRootLink  pNext;
+	PTRootLink  pNext;  // указатель на следующее звено
 public:
 	TRootLink(PTRootLink pN = NULL) { pNext = pN; }
 	PTRootLink  GetNextLink() { return  pNext; }

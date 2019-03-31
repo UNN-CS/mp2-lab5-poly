@@ -2,13 +2,13 @@
 
 class TMonom : public TDatValue {
 protected:
-	int Coeff; // 
-	int Index; // 
+	int Coeff; // коэффициент монома
+	int Index; // индекс (свертка степеней)
 public:
 	TMonom(int cval = 1, int ival = 0) {
 		Coeff = cval; Index = ival;
 	}
-	virtual TDatValue * GetCopy(); // 
+	virtual TDatValue * GetCopy(); // // изготовить копию
 	void SetCoeff(int cval) { Coeff = cval; }
 	int  GetCoeff(void) { return Coeff; }
 	void SetIndex(int ival) { Index = ival; }

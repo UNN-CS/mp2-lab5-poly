@@ -2,12 +2,14 @@
 
 class THeadRing : public TDatList {
 protected:
-	PTDatLink pHead;     
+	PTDatLink pHead;     // заголовок, pFirst - будет следующим за pHead 
 public:
 	THeadRing();
 	~THeadRing();
     
-	virtual void InsFirst(PTDatValue pVal = NULL); 
-												   
+    //вставка
+	virtual void InsFirst(PTDatValue pVal = NULL); // после заголовка
+    
+    //удаление											   
 	virtual void DelFirst(void);                 
 };

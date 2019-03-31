@@ -5,7 +5,7 @@ typedef TDatLink *PTDatLink;
 
 class TDatLink : public TRootLink {
 protected:
-	PTDatValue pValue;
+	PTDatValue pValue; // указатель на объект-значение
 public:
 	TDatLink(PTDatValue pVal = NULL, PTRootLink pN = NULL) :
 		TRootLink(pN) {

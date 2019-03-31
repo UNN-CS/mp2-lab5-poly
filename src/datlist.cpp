@@ -12,7 +12,7 @@ PTDatLink TDatList::GetLink(PTDatValue pVal, PTDatLink pLink)
 	return new TDatLink(pVal, pLink);
 }
 
-void TDatList::DelLink(PTDatLink pLink)
+void TDatList::DelLink(PTDatLink pLink) // удаление звена
 {
 	if (pLink != NULL)
 	{
@@ -22,7 +22,7 @@ void TDatList::DelLink(PTDatLink pLink)
 	}
 }
 
-PTDatValue TDatList::GetDatValue(TLinkPos mode) const
+PTDatValue TDatList::GetDatValue(TLinkPos mode) const //получить данные звена
 {
 	PTDatLink tmp;
 	switch (mode)
@@ -35,7 +35,7 @@ PTDatValue TDatList::GetDatValue(TLinkPos mode) const
 	return tmp->pValue;
 }
 
-int TDatList::Reset(void) 
+int TDatList::Reset(void) // установить текущим первое звено
 {
 	pPrevLink = pStop;
 	if (IsEmpty())
@@ -49,7 +49,7 @@ int TDatList::Reset(void)
 	return 1;
 }
 
-int TDatList::GoNext(void)
+int TDatList::GoNext(void) // сдвиг текущего звена вправо
 {
 	if (pCurrLink == pStop) return 0;
 	pPrevLink = pCurrLink;
@@ -58,35 +58,37 @@ int TDatList::GoNext(void)
 	return 1;
 }
 
-int TDatList::IsListEnded(void) const
+int TDatList::IsListEnded(void) const // вставить перед первым
 {
 	return pCurrLink == pStop;
 }
 
-int TDatList::GetCurrentPos(void) const
+int TDatList::GetCurrentPos(void) const // получить номер текущего звена
 {
 	return CurrPos;
 }
 
-int TDatList::SetCurrentPos(int pos)
+int TDatList::SetCurrentPos(int pos) // установить текущее звено
 {
 	if (pos < 0 || pos >= ListLen) return 0;
-	Reset();
+	Reset(); // возвращаемся в начало списка
 	for (int i = 0; i < pos; i++)
 		GoNext();
 	return 1;
 }
 
-void TDatList::InsFirst(PTDatValue pVal)
+void TDatList::InsFirst(PTDatValue pVal) // вставить перед первым
 {
 	PTDatLink tmp = GetLink(pVal, pFirst);
 	pFirst = tmp;
 	ListLen++;
+// проверка пустоты списка перед вставкой
 	if (ListLen == 1)
 	{
 		pLast = tmp;
 		Reset();
 	}
+    // коррекция текущей позиции - отличие обработки для начала списка
 	else
 	{
 		if (CurrPos == 0)
@@ -96,7 +98,7 @@ void TDatList::InsFirst(PTDatValue pVal)
 	}
 }
 
-void TDatList::InsLast(PTDatValue pVal)
+void TDatList::InsLast(PTDatValue pVal) // вставить последним
 {
 	PTDatLink tmp = GetLink(pVal, pStop);
 	if (pLast != NULL)
@@ -112,7 +114,7 @@ void TDatList::InsLast(PTDatValue pVal)
 		pCurrLink = tmp;
 }
 
-void TDatList::InsCurrent(PTDatValue pVal)
+void TDatList::InsCurrent(PTDatValue pVal) // вставить перед текущим
 {
 	if (IsEmpty() || (pCurrLink == pFirst))
 		InsFirst(pVal);
