@@ -1,6 +1,6 @@
 
-#include "Polinom.h"
-#include "DatList.h"
+#include "polinom.h"
+#include "datlist.h"
 
 #include "gtest.h"
 
