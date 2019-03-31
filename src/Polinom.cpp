@@ -26,7 +26,7 @@ TPolinom::TPolinom(TPolinom &q)
 	}
 }
 
-TPolinom TPolinom::operator+(TPolinom &q) // ñëîæåíèå ïîëèíîìîâ
+TPolinom & TPolinom::operator+(TPolinom &q) // ñëîæåíèå ïîëèíîìîâ
 {
 	TPolinom tmp = TPolinom();
 	PTMonom lm, rm, tmpM;
