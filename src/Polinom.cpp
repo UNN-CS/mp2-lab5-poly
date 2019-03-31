@@ -106,7 +106,7 @@ bool  TPolinom::operator==(TPolinom &q)
             return 0;
         if(pm->Coeff != qm -> Coeff)
             return 0;
-        if((pm -> Coeff != 0 && qm -> Coeff == 0) || (pm -> Coeff == 0 && qm -> Coeff != 0)
+        if((pm -> Coeff != 0 && qm -> Coeff == 0) || (pm -> Coeff == 0 && qm -> Coeff != 0))
             return 0;
         else {
             if(pm -> Coeff == 0 && qm -> Coeff == 0)
