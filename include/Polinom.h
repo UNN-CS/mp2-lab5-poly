@@ -15,7 +15,7 @@ public:
 	TPolinom(TPolinom &q);      // êîíñòðóêòîð êîïèðîâàíèÿ
 	TPolinom(const TPolinom &q);
 	PTMonom  GetMonom() { return (PTMonom)GetDatValue(); }
-	TPolinom & operator+(TPolinom &q);
+	TPolinom  operator+(TPolinom &q);
 	TPolinom & operator=(TPolinom &q); // ïðèñâàèâàíèå
 	bool operator==(TPolinom &q);
 	friend std::ostream& operator<<(std::ostream& out, TPolinom& p);

@@ -26,7 +26,7 @@ TPolinom::TPolinom(TPolinom &q)
 	}
 }
 
-TPolinom& TPolinom::operator+(TPolinom &q) // сложение полиномов
+TPolinom TPolinom::operator+(TPolinom &q) // сложение полиномов
 {
 	TPolinom tmp = TPolinom();
 	PTMonom lm, rm, tmpM;
@@ -105,7 +105,7 @@ bool  TPolinom::operator==(TPolinom &q)
             return 0;
         if(pm->Coeff != qm -> Coeff)
             return 0;
-        if(pm -> Coeff != 0 && qm -> Coeff == 0 || pm -> Coeff == 0 && qm -> Coeff != 0)
+        if((pm -> Coeff != 0 && qm -> Coeff == 0) || (pm -> Coeff == 0 && qm -> Coeff != 0)
             return 0;
         else {
             if(pm -> Coeff == 0 && qm -> Coeff == 0)

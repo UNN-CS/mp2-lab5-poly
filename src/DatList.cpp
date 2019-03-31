@@ -1,4 +1,5 @@
 #include "DatList.h"
+#include <iostream>
 
 TDatList::TDatList()
 {
@@ -44,7 +45,7 @@ PTDatValue TDatList::GetDatValue(TLinkPos mode) const
 int TDatList::SetCurrentPos(int pos)
 {
 	Reset();
-	for (int i = 0; i < pos; i++) 
+	for (int i = 0; i < pos; i++)
 		GoNext();
 	return 0;
 
@@ -75,7 +76,7 @@ int TDatList::Reset()
 int TDatList::GoNext()
 {
 	pPrevLink = pCurrLink;
-	pCurrLink = pCurrLink->GetNextLink(); ////
+	pCurrLink = pCurrLink->GetNextDatLink(); ////
 	CurrPos++;
 	return 0;
 }
@@ -111,7 +112,7 @@ void TDatList::InsFirst(PTDatValue pVal)
 void TDatList::InsLast(PTDatValue pVal)
 {
 	PTDatLink tmp = GetLink(pVal, pStop);
-	
+
 	if (pLast != NULL)
 		pLast->SetNextLink(tmp);
 	pLast = tmp;
@@ -136,7 +137,7 @@ void TDatList::InsCurrent(PTDatValue pVal)
 	else
 	{
 		PTDatLink tmp = GetLink(pVal, pCurrLink);
-		if (tmp = NULL)
+		if (tmp == NULL)
 			;
 		else
 		{
@@ -163,9 +164,9 @@ void TDatList::DelFirst()
 			Reset();
 		}
 		else if (CurrPos == 0)
-			pCurrLink == pFirst;
+			pCurrLink = pFirst;
 		else if (CurrPos == 1)
-			pPrevLink == pStop;
+			pPrevLink = pStop;
 		if (CurrPos > 0)
 			CurrPos--;
 	}
