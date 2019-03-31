@@ -1,4 +1,4 @@
-#include "Headring.h"
+#include "HeadRing.h"
 
 THeadRing::THeadRing()
 {

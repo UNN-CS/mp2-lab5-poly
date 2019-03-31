@@ -1,4 +1,4 @@
-#include <Polinom.h>
+#include "Polinom.h"
 
 TPolinom::TPolinom(int monoms[][2], int km) : THeadRing()
 {
@@ -26,7 +26,8 @@ TPolinom::TPolinom(TPolinom &q)
 	}
 }
 
-TPolinom TPolinom::operator+(TPolinom &q) // сложение полиномов
+
+TPolinom TPolinom::operator+(TPolinom &q)
 {
 	TPolinom tmp = TPolinom();
 	PTMonom lm, rm, tmpM;
@@ -116,17 +117,16 @@ bool  TPolinom::operator==(TPolinom &q)
     }
 }
 
-TPolinom & TPolinom::operator=(TPolinom &q) // присваивание
+TPolinom & TPolinom::operator=(TPolinom &q) // ГЇГ°ГЁГ±ГўГ ГЁГўГ Г­ГЁГҐ
 {
 	DelList();
 
-	q.Reset();
-	while (q.IsListEnded())
+	for(q.Reset(); !q.IsListEnded(); q.GoNext())
 	{
-		PTMonom tmp = q.GetMonom();
-		InsLast(tmp->GetCopy());
-		q.GoNext();
+	    PTMonom pMonom = q.GetMonom();
+	    InsLast(pMonom->GetCopy());
 	}
+
 	return *this;
 }
 
