@@ -1,231 +1,503 @@
-
 #include "polinom.h"
-#include "datlist.h"
 
-#include "gtest.h"
+#include <gtest.h>
 
-#include <iostream>
-using namespace std;
-
-TEST(TPolinom, can_create_polinom) {
-	int m[][2] = { { 2, 3 },{ 4, 5 } };
-	ASSERT_NO_THROW(TPolinom p(m, 2));
-}
-
-TEST(TPolinom, can_create_copied_polinom) {
-	int m[][2] = { { 2, 8 },{ 4, 5 } };
-	TPolinom p(m, 2);
-	ASSERT_NO_THROW(TPolinom p2 = p);
-}
-
-TEST(TPolinom, copied_polinom_is_equal_to_source_one) {
-	int m[][2] = { { 2, 8 },{ 4, 5 } };
-	TPolinom p1(m, 2);
-	TPolinom p2 = p1;
-	ASSERT_TRUE(p1 == p2);
-}
-
-TEST(TPolinom, copied_polinom_has_its_own_memory) {
-	int m1[][2] = { { 2, 8 },{ 4, 5 } };
-	int m2[][2] = { { 2, 6 },{ 5, 6 } };
-	TPolinom p1(m1, 1), p2 = p1, p3(m2, 2);
-	p1 = p3;
-	ASSERT_FALSE(p1 == p2);
-}
-
-
-TEST(TPolinom, plus_test) {
-	int m[][2] = { { -2, 59 },{ 5, 43 } };
-	TPolinom p1, p2(m, 2);
-	p1 += p2;
-	ASSERT_TRUE(p1 == p2);
-}
-
-TEST(TPolinom, plus_test2) {
-	int m[][2] = { { -2, 59 },{ 5, 43 } };
-	TPolinom p1, p2(m, 2), p3(m, 2);
-	p2 += p1;
-	ASSERT_TRUE(p3 == p2);
-}
-
-TEST(TPolinom, plus_test3) {
-	int m1[][2] = { { 1, 5 },{ 5, 4 },{ 3, 2 } };
-	int m2[][2] = { { 3, 3 } };
-	int m3[][2] = { { 1, 5 },{ 5, 4 },{ 3, 3 },{ 3, 2 } };
-	TPolinom p1(m1, 3), p2(m2, 1), p3(m3, 4);
-	p1 += p2;
-	ASSERT_TRUE(p1 == p3);
-}
-
-TEST(TPolinom, plus_test4) {
-	int m1[][2] = { { 1, 5 },{ 5, 4 },{ 3, 2 } };
-	int m2[][2] = { { 3, 3 } };
-	int m3[][2] = { { 1, 5 },{ 5, 4 },{ 3, 3 },{ 3, 2 } };
-	TPolinom p1(m1, 3), p2(m2, 1), p3(m3, 4);
-	p2 += p1;
-	ASSERT_TRUE(p2 == p3);
-}
-
-TEST(TPolinom, plus_test5) {
-	int m1[][2] = { { 1, 5 },{ 5, 4 },{ 3, 0 } };
-	int m2[][2] = { { -1, 5 },{ -5, 4 },{ -2, 0 } };
-	int m3[][2] = { { 1, 0 } };
-	TPolinom p1(m1, 3), p2(m2, 3), p3(m3, 1);
-	p1 += p2;
-	ASSERT_TRUE(p1 == p3);
-}
-
-TEST(TPolinom, plus_test6) {
-	int m1[][2] = { { 2, 5 },{ 5, 4 },{ 3, 0 } };
-	int m2[][2] = { { -1, 5 },{ -5, 4 },{ -3, 0 } };
-	int m3[][2] = { { 1, 5 } };
-	TPolinom p1(m1, 3), p2(m2, 3), p3(m3, 1);
-	p1 += p2;
-	ASSERT_TRUE(p1 == p3);
-}
-
-TEST(TPolinom, plus_test7) {
-	int m1[][2] = { { 1, 100 },{ 9, 10 },{ 2, 4 },{ 15, 0 } };
-	int m2[][2] = { { 4, 100 },{ -2, 4 },{ 4, 2 },{ 5, 0 } };
-	int m3[][2] = { { 5, 100 },{ 9, 10 },{ 4, 2 },{ 20, 0 } };
-	TPolinom p1(m1, 4);
-	TPolinom p2(m2, 4);
-	TPolinom p3(m3, 4);
-	p1 += p2;
-	ASSERT_TRUE(p3 == p1);
-}
-
-TEST(TPolinom, plus_test8) {
-	int m1[1000][2], m2[1000][2], m3[1000][2];
-	for (int i = 0; i < 1000; i++)
-	{
-		m1[i][0] = i + 1, m1[i][1] = 999 - i;
-		m2[i][0] = -i, m2[i][1] = 999 - i;
-		m3[i][0] = 1, m3[i][1] = 999 - i;
-	}
-	TPolinom p1(m1, 1000), p2(m2, 1000), p3(m3, 1000);
-	p1 += p2;
-	ASSERT_TRUE(p1 == p3);
-}
-
-TEST(TPolinom, plus_test9) {
-	TPolinom p1, p2, p3;
-	p1 += p2;
-	ASSERT_TRUE(p1 == p3);
-}
-
-TEST(TDatList, can_create_dat_list_object) {
-	ASSERT_NO_THROW(TDatList tmp);
-}
-
-
-TEST(TDatList, can_insert_current_several_times) {
+TEST(TDatList, can_insert_first_if_empty)
+{
 	TDatList List;
-	PTMonom p = new TMonom(5, 6);
-	ASSERT_NO_THROW(List.InsCurrent(p));
-	ASSERT_NO_THROW(List.InsCurrent(p));
-	ASSERT_NO_THROW(List.InsCurrent(p));
-	ASSERT_NO_THROW(List.InsCurrent(p));
-	delete p;
+	TMonom *monom = new TMonom(1, 111);
+	List.InsFirst(monom);
+
+	EXPECT_EQ(1, List.GetListLength());
 }
 
-TEST(TDatList, can_insert_last_several_times) {
+TEST(TDatList, can_insert_first_if_no_empty)
+{
 	TDatList List;
-	PTMonom p = new TMonom(5, 6);
-	ASSERT_NO_THROW(List.InsLast(p));
-	ASSERT_NO_THROW(List.InsLast(p));
-	delete p;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+
+	EXPECT_EQ(2, List.GetListLength());
 }
 
-TEST(TDatList, can_delete_first_element_several_times) {
+TEST(TDatList, can_insert_last_if_empty)
+{
 	TDatList List;
-	PTMonom p = new TMonom(5, 6);
-	List.InsFirst(p);
-	List.InsFirst(p);
-	ASSERT_NO_THROW(List.DelFirst());
-	ASSERT_NO_THROW(List.DelFirst());
-	delete p;
+	TMonom *monom = new TMonom(1, 111);
+	List.InsLast(monom);
+
+	EXPECT_EQ(1, List.GetListLength());
 }
 
-TEST(TDatList, can_delete_current_element_several_times) {
+TEST(TDatList, can_insert_last_if_no_empty)
+{
 	TDatList List;
-	PTMonom p = new TMonom(5, 6);
-	List.InsFirst(p);
-	List.InsFirst(p);
-	ASSERT_NO_THROW(List.DelCurrent());
-	ASSERT_NO_THROW(List.DelCurrent());
-	delete p;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	List.InsLast(monom1);
+	List.InsLast(monom2);
+
+	EXPECT_EQ(2, List.GetListLength());
 }
 
-TEST(TDatList, cant_delete_from_empty_list) {
+TEST(TDatList, can_insert_current_if_empty)
+{
 	TDatList List;
+	TMonom *monom = new TMonom(1, 111);
+	List.InsCurrent(monom);
+
+	EXPECT_EQ(1, List.GetListLength());
+}
+
+TEST(TDatList, can_insert_current_if_no_empty_1)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.GoNext();
+	List.InsCurrent(monom3);
+
+	EXPECT_EQ(3, List.GetListLength());
+}
+
+TEST(TDatList, can_insert_current_if_no_empty_2)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.GoNext();
+	List.InsCurrent(monom3);
+
+	EXPECT_EQ(1, List.GetCurrentPos());
+}
+
+TEST(TDatList, can_insert_current_if_no_empty_3)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.GoNext();
+	List.GoNext();
+	List.InsCurrent(monom3);
+
+	EXPECT_EQ(2, List.GetCurrentPos());
+}
+
+TEST(TDatList, cant_delete_first_empty_list)
+{
+	TDatList List;
+
 	ASSERT_ANY_THROW(List.DelFirst());
+}
+
+TEST(TDatList, can_delete_first_single)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	List.InsFirst(monom1);
+	List.DelFirst();
+
+	EXPECT_TRUE(List.IsEmpty());
+}
+
+TEST(TDatList, can_delete_first_1)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.InsFirst(monom3);
+	List.DelFirst();
+
+	EXPECT_FALSE(List.IsEmpty());
+}
+
+TEST(TDatList, can_delete_first_2)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.InsFirst(monom3);
+	List.DelFirst();
+
+	EXPECT_EQ(2, List.GetListLength());
+}
+
+TEST(TDatList, cant_delete_current_empty_list)
+{
+	TDatList List;
+
 	ASSERT_ANY_THROW(List.DelCurrent());
 }
 
-TEST(TDatList, list_len_is_changed_after_inserts_and_deletes) {
+TEST(TDatList, can_delete_current_single)
+{
 	TDatList List;
-	PTMonom p = new TMonom(5, 6);
-	List.InsFirst(p);
-	ASSERT_TRUE(List.GetListLength() == 1);
-	List.InsLast(p);
-	ASSERT_TRUE(List.GetListLength() == 2);
-	List.InsCurrent(p);
-	ASSERT_TRUE(List.GetListLength() == 3);
-	List.DelFirst();
-	ASSERT_TRUE(List.GetListLength() == 2);
+	TMonom *monom1 = new TMonom(1, 111);
+	List.InsFirst(monom1);
 	List.DelCurrent();
-	ASSERT_TRUE(List.GetListLength() == 1);
+
+	EXPECT_TRUE(List.IsEmpty());
 }
 
-TEST(TDatList, list_del_function_is_correct) {
+TEST(TDatList, can_delete_current_1)
+{
 	TDatList List;
-	PTMonom p = new TMonom(5, 6);
-	List.InsFirst(p);
-	List.InsLast(p);
-	List.InsCurrent(p);
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.InsFirst(monom3);
+	List.GoNext();
+	List.GoNext();
+	List.DelCurrent();
+
+	EXPECT_FALSE(List.IsEmpty());
+}
+
+TEST(TDatList, can_delete_current_2)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.InsFirst(monom3);
+	List.GoNext();
+	List.GoNext();
+	List.DelCurrent();
+
+	EXPECT_EQ(2, List.GetListLength());
+}
+
+TEST(TDatList, can_delete_list_single_elements)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	List.InsFirst(monom1);
 	List.DelList();
-	ASSERT_TRUE(List.GetListLength() == 0);
-	ASSERT_TRUE(List.GetDatValue() == NULL);
-	ASSERT_TRUE(List.GetCurrentPos() == -1);
+
+	EXPECT_TRUE(List.IsEmpty());
 }
 
-TEST(TDatList, can_go_next) {
+TEST(TDatList, can_delete_list)
+{
 	TDatList List;
-	PTMonom p = new TMonom(5, 6);
-	List.InsFirst(p);
-	List.InsFirst(p);
-	List.InsFirst(p);
-	List.Reset();
-	ASSERT_NO_THROW(List.GoNext());
-	ASSERT_TRUE(List.GetCurrentPos() == 1);
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.InsFirst(monom3);
+	List.DelList();
+
+	EXPECT_TRUE(List.IsEmpty());
 }
 
-TEST(TDatList, cant_go_next_after_last_elem) {
+TEST(TDatList, list_empty)
+{
 	TDatList List;
-	PTMonom p = new TMonom(5, 6);
-	List.InsFirst(p);
-	List.Reset();
+
+	EXPECT_TRUE(List.IsEmpty());
+}
+
+TEST(TDatList, list_no_empty)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	List.InsFirst(monom1);
+
+	EXPECT_FALSE(List.IsEmpty());
+}
+
+TEST(TDatList, list_empty_length)
+{
+	TDatList List;
+
+	EXPECT_EQ(0, List.GetListLength());
+}
+
+TEST(TDatList, list_no_empty_length)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	List.InsFirst(monom1);
+
+	EXPECT_EQ(1, List.GetListLength());
+}
+
+TEST(TDatList, can_set_current_position)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.InsFirst(monom3);
+	List.SetCurrentPos(1);
+
+	EXPECT_EQ(1, List.GetCurrentPos());
+}
+
+TEST(TDatList, can_get_current_position)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.InsFirst(monom3);
+
+	EXPECT_EQ(0, List.GetCurrentPos());
+}
+
+TEST(TDatList, can_reset_current_position)
+{
+	TDatList List;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.InsFirst(monom3);
 	List.GoNext();
-	ASSERT_ANY_THROW(List.GoNext());
+	List.GoNext();
+	List.Reset();
+
+	EXPECT_EQ(0, List.GetCurrentPos());
 }
 
-TEST(TDatList, reset_function_is_correct) {
+TEST(TDatList, list_ended)
+{
 	TDatList List;
-	PTMonom p = new TMonom(5, 6);
-	List.InsFirst(p);
-	List.Reset();
-	ASSERT_TRUE(List.GetCurrentPos() == 0);
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.InsFirst(monom3);
+	List.GoNext();
+	List.GoNext();
+	List.GoNext();
+
+	EXPECT_TRUE(List.IsListEnded());
+}
+
+TEST(THeadRing, can_insert_first)
+{
+	THeadRing List;
+	TMonom *monom = new TMonom(1, 111);
+	List.InsFirst(monom);
+
+	EXPECT_EQ(1, List.GetListLength());
+}
+
+TEST(THeadRing, can_delete_first_single)
+{
+	THeadRing List;
+	TMonom *monom1 = new TMonom(1, 111);
+	List.InsFirst(monom1);
 	List.DelFirst();
-	List.Reset();
-	ASSERT_TRUE(List.GetCurrentPos() == -1);
+
+	EXPECT_TRUE(List.IsEmpty());
 }
 
-TEST(TDatList, is_list_ended_function_is_correct) {
-	TDatList List;
-	PTMonom p = new TMonom(5, 6);
-	List.InsFirst(p);
-	List.Reset();
-	List.GoNext();
-	ASSERT_TRUE(List.IsListEnded() == 1);
+TEST(THeadRing, can_delete_first)
+{
+	THeadRing List;
+	TMonom *monom1 = new TMonom(1, 111);
+	TMonom *monom2 = new TMonom(2, 222);
+	TMonom *monom3 = new TMonom(3, 333);
+	List.InsFirst(monom1);
+	List.InsFirst(monom2);
+	List.InsFirst(monom3);
+	List.DelFirst();
+
+	EXPECT_FALSE(List.IsEmpty());
 }
+
+TEST(TPolinom, can_create_empty_polinom)
+{
+	TPolinom polinom;
+
+	EXPECT_TRUE(polinom.IsEmpty());
+}
+
+TEST(TPolinom, can_create_no_empty_polinom_1)
+{
+	int m1[][2] = { { 1, 594 },{ 5, 321 },{ 12, 132 },{ 2, 98 },{ 10, 19 },{ -5, 6 },{ -10, 0 } };
+	TPolinom polinom(m1, 7);
+
+	EXPECT_FALSE(polinom.IsEmpty());
+}
+
+TEST(TPolinom, can_create_no_empty_polinom_2)
+{
+	int m1[][2] = { { 1, 594 },{ 5, 321 },{ 12, 132 },{ 2, 98 },{ 10, 19 },{ -5, 6 },{ -10, 0 } };
+	TPolinom polinom(m1, 7);
+
+	EXPECT_EQ(7, polinom.GetListLength());
+}
+
+TEST(TPolinom, can_create_copy_empty_polinom)
+{
+	TPolinom polinom1;
+	TPolinom polinom2(polinom1);
+
+	EXPECT_TRUE(polinom2.IsEmpty());
+}
+
+TEST(TPolinom, can_create_copy_no_empty_polinom_1)
+{
+	int m1[][2] = { { 1, 594 },{ 5, 321 },{ 12, 132 },{ 2, 98 },{ 10, 19 },{ -5, 6 },{ -10, 0 } };
+	TPolinom polinom1(m1, 7);
+	TPolinom polinom2(polinom1);
+
+	EXPECT_FALSE(polinom2.IsEmpty());
+}
+
+TEST(TPolinom, can_create_copy_no_empty_polinom_2)
+{
+	int m1[][2] = { { 1, 594 },{ 5, 321 },{ 12, 132 },{ 2, 98 },{ 10, 19 },{ -5, 6 },{ -10, 0 } };
+	TPolinom polinom1(m1, 7);
+	TPolinom polinom2(polinom1);
+
+	EXPECT_EQ(7, polinom2.GetListLength());
+}
+
+TEST(TPolinom, can_create_copy_no_empty_polinom_3)
+{
+	int m1[][2] = { { 1, 594 },{ 5, 321 },{ 12, 132 },{ 2, 98 },{ 10, 19 },{ -5, 6 },{ -10, 0 } };
+	TPolinom polinom1(m1, 7);
+	TPolinom polinom2(polinom1);
+
+	EXPECT_NE(&polinom1, &polinom2);
+}
+
+TEST(TPolinom, can_add_1)
+{
+	int mon1[][2] = { { 1, 543 },{ 3, 432 },{ 5, 321 },{ 7, 210 } };
+	int mon2[][2] = { { 2, 643 },{ 4, 431 },{ -5, 321 },{ 8, 110 },{ 3, 60 } };
+	int mon3[][2] = { { 2, 643 },{ 1, 543 },{ 3, 432 },{ 4, 431 },{ 7, 210 },{ 8, 110 },{ 3, 60 } };
+	TPolinom p1(mon1, 4);
+	TPolinom p2(mon2, 5);
+	TPolinom p3(mon3, 7);
+	p1 += p2;
+
+	EXPECT_TRUE(p3 == p1);
+}
+
+TEST(TPolinom, can_add_2)
+{
+	int m0[][2] = { { 1,344 },{ -3,233 },{ 6,23 } };
+	int m1[][2] = { { 6,342 },{ 3,33 } };
+	int m2[][2] = { { 3,33 } };
+	int m3[][2] = { { 1,344 },{ 6,342 },{ -3,233 },{ 6,23 } };
+	TPolinom p1(m0, 3), p2(m1, 2), p3(m2, 1), p4(m3, 4);
+	p1 += p2;
+	p3 += p4;
+	EXPECT_TRUE(p1 == p3);
+}
+
+TEST(TPolinom, can_add_3)
+{
+	int m1[][2] = { { 3,33 } };
+	int m2[][2] = { { -3,33 } };
+	TPolinom p1(m1, 1), p2(m2, 1);
+	p1 += p2;
+
+	EXPECT_TRUE(p1.IsEmpty());
+}
+
+TEST(TPolinom, can_add_4)
+{
+	int m1[][2] = { {2,222}, {1,111}, { 3,33 } };
+	int m2[][2] = { {3,333}, { -3,33 } };
+	TPolinom p1(m1, 1), p2(m2, 1);
+	p1 += p2;
+
+	EXPECT_FALSE(p1.IsEmpty());
+}
+
+TEST(TPolinom, can_add_5)
+{
+	int m1[][2] = { { 2,222 },{ 1,111 },{ 3,33 } };
+	int m2[][2] = { { 3,333 },{ -3,33 } };
+	TPolinom p1(m1, 3), p2(m2, 2);
+	p1 += p2;
+
+	EXPECT_EQ(3, p1.GetListLength());
+}
+
+TEST(TPolinom, can_assign_1)
+{
+	int m1[][2] = { { 2,222 },{ 1,111 },{ 3,33 } };
+	int m2[][2] = { { 3,333 },{ -3,33 } };
+	TPolinom p1(m1, 1), p2(m2, 1);
+	p1 = p2;
+
+	EXPECT_TRUE(p1 == p2);
+}
+
+TEST(TPolinom, can_assign_2)
+{
+	int m1[][2] = { { 2,222 },{ 1,111 },{ 3,33 } };
+	int m2[][2] = { { 3,333 },{ -3,33 } };
+	TPolinom p1(m1, 1), p2(m2, 1);
+	p1 = p2;
+
+	EXPECT_FALSE(&p1 == &p2);
+}
+
+TEST(TPolinom, can_assign_3)
+{
+	int m1[][2] = { { 2,222 },{ 1,111 },{ 3,33 } };
+	int m2[][2] = { { 3,333 },{ -3,33 } };
+	TPolinom p1(m1, 3), p2(m2, 2);
+	p1 = p2;
+
+	EXPECT_EQ(2, p1.GetListLength());
+}
+
+TEST(TPolinom, can_assign_4)
+{
+	int m1[][2] = { { 2,222 },{ 1,111 },{ 3,33 } };
+	TPolinom p1(m1, 1), p2;
+	p1 = p2;
+
+	EXPECT_TRUE(p1.IsEmpty());
+}
+
+TEST(TPolinom, can_assign_5)
+{
+	int m1[][2] = { { 2,222 },{ 1,111 },{ 3,33 } };
+	TPolinom p1(m1, 1), p2;
+	p1 = p2;
+
+	EXPECT_EQ(0, p1.GetListLength());
+}
+
+
+
+
+
