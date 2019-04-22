@@ -1,4 +1,11 @@
-class TDatList : {
+#pragma once
+#include "DatLink.h"
+#include <iostream>
+
+enum TLinkPos { FIRST, CURRENT, LAST };
+
+class TDatList : 
+{
 protected:
 	PTDatLink pFirst;    // первое звено
 	PTDatLink pLast;     // последнее звено

@@ -1,3 +1,6 @@
+#pragma once
+#include "RootLink.h"
+
 class TDatLink;
 typedef TDatLink *PTDatLink;
 
@@ -6,11 +9,21 @@ protected:
 	PTDatValue pValue;  // указатель на объект значения
 public:
 	TDatLink(PTDatValue pVal = NULL, PTRootLink pN = NULL) :
-		TRootLink(pN) {
+		TRootLink(pN) 
+	{
 		pValue = pVal;
 	}
-	void       SetDatValue(PTDatValue pVal) { pValue = pVal; }
-	PTDatValue GetDatValue() { return  pValue; }
-	PTDatLink  GetNextDatLink() { return  (PTDatLink)pNext; }
+	void       SetDatValue(PTDatValue pVal) 
+	{ 
+		pValue = pVal; 
+	}
+	PTDatValue GetDatValue() 
+	{ 
+		return  pValue; 
+	}
+	PTDatLink  GetNextDatLink() 
+	{ 
+		return  (PTDatLink)pNext; 
+	}
 	friend class TDatList;
 };

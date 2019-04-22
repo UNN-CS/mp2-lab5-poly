@@ -1,3 +1,7 @@
+#pragma once
+#include "HeadRing.h"
+#include "Monom.h"
+#include <iostream>
 class TPolinom : public THeadRing {
 public:
 	TPolinom(int monoms[][2] = NULL, int km = 0); // конструктор

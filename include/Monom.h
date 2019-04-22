@@ -1,3 +1,6 @@
+#pragma once
+#include <iostream>
+#include "DatValue.h"
 class TMonom : public TDatValue {
 protected:
 	int Coeff; // коэффициент монома
