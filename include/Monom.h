@@ -1,13 +1,18 @@
 #pragma once
 #include <iostream>
 #include "DatValue.h"
+
+class TMonom;
+typedef TMonom * PTMonom;
+
 class TMonom : public TDatValue {
 protected:
 	int Coeff; // коэффициент монома
 	int Index; // индекс (свертка степеней)
 public:
 	TMonom(int cval = 1, int ival = 0) {
-		Coeff = cval; Index = ival;
+		Coeff = cval; 
+		Index = ival;
 	};
 	virtual TDatValue * GetCopy(); // изготовить копию
 	void SetCoeff(int cval) { Coeff = cval; }

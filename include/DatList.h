@@ -4,7 +4,7 @@
 
 enum TLinkPos { FIRST, CURRENT, LAST };
 
-class TDatList : 
+class TDatList 
 {
 protected:
 	PTDatLink pFirst;    // первое звено
@@ -13,7 +13,7 @@ protected:
 	PTDatLink pPrevLink; // звено перед текущим
 	PTDatLink pStop;     // значение указателя, означающего конец списка 
 	int CurrPos;         // номер текущего звена (нумерация от 0)
-	int ListLen;         // количество звеньев в списке
+	int ListLen;         // количество звеньев в списке (Size)
 protected:  // методы
 	PTDatLink GetLink(PTDatValue pVal = NULL, PTDatLink pLink = NULL);
 	void      DelLink(PTDatLink pLink);   // удаление звена

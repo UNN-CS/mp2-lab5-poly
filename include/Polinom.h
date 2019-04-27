@@ -10,4 +10,7 @@ public:
 	PTMonom  GetMonom() { return (PTMonom)GetDatValue(); }
 	TPolinom & operator+(TPolinom &q); // сложение полиномов
 	TPolinom & operator=(TPolinom &q); // присваивание
+	int CalculatePolynom(int x, int y, int z);
+	friend std::ostream& operator<<(std::ostream &os, TPolinom &q);
+	friend std::istream& operator>>(std::istream &is, TPolinom &q);
 };
