@@ -159,7 +159,7 @@ void TDatList::DelCurrent(void) {
 }
 
 void TDatList::DelList(void) {
-    while (!IsEmpty)
+    while (!IsEmpty())
         DelFirst();
     pFirst = pPrevLink = pCurrLink = pLast = pStop;
     CurrPos = -1;

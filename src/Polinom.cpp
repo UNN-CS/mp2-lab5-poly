@@ -47,7 +47,7 @@ TPolinom::TPolinom(TPolinom& q) {
     pHead->SetDatValue(pMonom);
     for (q.Reset(); !q.IsListEnded(); q.GoNext()) {
         PTMonom pMonom = q.GetMonom();
-        InsLast(pMonom->GetCopy);
+        InsLast(pMonom->GetCopy());
     }
 }
 
@@ -68,6 +68,8 @@ bool TPolinom::operator==(TPolinom& q) {
         Reset();
         q.Reset();
         while (1) {
+            pm = GetMonom();
+            qm = q.GetMonom();
             if (pm->Coeff != qm->Coeff ||
                 pm->Index != qm->Index)
                 return 0;
@@ -86,6 +88,6 @@ bool TPolinom::operator!=(TPolinom& q) {
 
 std::ostream& operator<<(std::ostream& os, TPolinom& q) {
     for (q.Reset(); !q.IsListEnded(); q.GoNext())
-        os << (*q.GetMonom()).GetIndex << ' ' << (*q.GetMonom()).GetCoeff() << std::endl;
+        os << (*q.GetMonom()).GetIndex() << ' ' << (*q.GetMonom()).GetCoeff() << std::endl;
     return os;
 }
