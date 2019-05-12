@@ -4,7 +4,7 @@
 #include "DatLink.h"
 // #include "DataCom.h"
 
-// #define ListOK 0 // ошибок нет
+#define ListOK 0 // ошибок нет
 #define ListEmpty -101 // список пуст
 #define ListNoMem -102 // нет памяти
 #define ListNoPos -103 // ошибочное положение указателя
