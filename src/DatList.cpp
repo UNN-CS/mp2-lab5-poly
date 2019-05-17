@@ -15,7 +15,8 @@ PTDatLink TDatList::GetLink(PTDatValue pVal, PTDatLink pLink) {
 
 void TDatList::DelLink(PTDatLink pLink) {
     if (pLink != nullptr) {
-        if (pLink->pValue != nullptr) delete pLink->pValue;
+        if (pLink->pValue != nullptr)
+            delete pLink->pValue;
         delete pLink;
     }
 }
