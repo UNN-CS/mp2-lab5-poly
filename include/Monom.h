@@ -1,9 +1,7 @@
 #ifndef __MONOM_H__
 #define __MONOM_H__
 
-#include "datvalue.h"
-
-typedef TMonom *PTMonom;
+#include "DatValue.h"
 
 class TMonom : public TDatValue 
 {
@@ -31,11 +29,17 @@ public:
 	{
 		return (Coeff == tm.Coeff) && (Index == tm.Index);
 	}
+    int operator!=(const TMonom &tm)
+    {
+        return (Coeff != tm.Coeff) || (Index != tm.Index);
+    }
 	int operator<(const TMonom &tm) 
 	{
 		return Index<tm.Index;
 	}
 	friend class TPolinom;
 };
+
+typedef TMonom *PTMonom;
 
 #endif // __MONOM_H__

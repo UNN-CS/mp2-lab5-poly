@@ -3,8 +3,6 @@
 
 #include "RootLink.h"
 
-typedef TDatLink *PTDatLink;
-
 class TDatLink : public TRootLink 
 {
 protected:
@@ -26,5 +24,7 @@ public:
 
 	friend class TDatList;
 };
+
+typedef TDatLink *PTDatLink;
 
 #endif // __DATLINK_H__
