@@ -1,7 +1,7 @@
 #ifndef __DATLINK_H__
 #define __DATLINK_H__
 
-#include "rootlink.h"
+#include "RootLink.h"
 
 typedef TDatLink *PTDatLink;
 

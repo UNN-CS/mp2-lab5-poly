@@ -1,4 +1,4 @@
-#include <polinom.h>
+#include <Polinom.h>
 
 TPolinom::TPolinom(int monoms[][2], int km) 
 {

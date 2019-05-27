@@ -1,7 +1,7 @@
 #ifndef  H_DATLIST
 #define H_DATLIST
 
-#include "datlink.h"
+#include "DatLink.h"
 
 enum TLinkPos { FIRST, CURRENT, LAST };
 
