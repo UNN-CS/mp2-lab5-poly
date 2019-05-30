@@ -1,6 +1,7 @@
-#include <Monom.h>
+#include "Monom.h"
 
-TDatValue* TMonom::GetCopy()
-{
-	return new TMonom(Coeff, Index);
+TDatValue * TMonom::GetCopy() {
+    TMonom * tmp = new TMonom;
+    tmp ->Coeff = Coeff, tmp->Index = Index;
+    return tmp;
 }
