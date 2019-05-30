@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
+if(MSVC) 
+add_definitions(/D _VARIADIC_MAX=10) 
+endif()
+
 set(PROJECT_NAME poly)
 project(${PROJECT_NAME})
 
