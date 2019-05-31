@@ -1,5 +1,4 @@
 #include <iostream>
-#include <conio.h>
 #include "Polinom.h"
 using namespace std;
 
@@ -16,8 +15,6 @@ int main()
 	TPolinom q(ms2, mn2);
 	cout << "2 poly" << endl << q;
 	p += q;
-	cout << "result " << endl << p;
-	cout << "Press any key" << endl;
-	getch();
+	cout << "result " << endl << p<<endl;
 	return 0;
 }
