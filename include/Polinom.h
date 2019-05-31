@@ -14,6 +14,7 @@ class TPolinom : public THeadRing
 		{
 			return (PTMonom)GetDatValue();
 		}
+		
 		TPolinom & operator+(TPolinom &q);
 		
 		TPolinom & operator=(TPolinom &q); 
