@@ -9,5 +9,7 @@ public:
     PTMonom GetMonom();
     TPolinom& operator+=(TPolinom &q);
     TPolinom& operator=(TPolinom &q);
+    bool operator==(TPolinom &q);
+    bool operator!=(TPolinom &q);
     void Print();
 };

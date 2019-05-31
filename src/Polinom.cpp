@@ -2,22 +2,14 @@
 
 TPolinom::TPolinom(int monoms[][2], int km)
 {
-    PTMonom h = new TMonom(0, -1);
-    pHead->SetDatValue(h);
+    if (km < 0) throw - 1;
+    PTMonom pMonom = new TMonom(0, -1);
+    pHead->SetDatValue(pMonom);
 
-    PTMonom f = new TMonom(monoms[0][0], monoms[0][1]);
-    InsFirst(f);
-
-    for (int i = 1; i< km; i++)
+    for (int i = 0; i < km; ++i)
     {
-        PTMonom t = new TMonom(monoms[i][0], monoms[i][1]);
-
-        for (; !IsListEnded(); GoNext())
-        {
-            if (t->GetIndex() >= (GetMonom()->GetIndex()))
-                break;
-        }
-        InsCurrent(t);
+        pMonom = new TMonom(monoms[i][0], monoms[i][1]);
+        InsLast(pMonom);
     }
 }
 
@@ -36,32 +28,41 @@ PTMonom TPolinom::GetMonom()
 
 TPolinom& TPolinom::operator+=(TPolinom &q)
 {
-    for (q.Reset(); !(q.IsListEnded()); q.GoNext())
+    PTMonom pm, qm, rm;
+    Reset();
+    q.Reset();
+    while (true)
     {
-        for (Reset(); !(IsListEnded()); GoNext())
+        pm = GetMonom();
+        qm = q.GetMonom();
+
+        if (pm->Index < qm->Index)
         {
-            if (GetMonom()->Index == q.GetMonom()->Index)
+            rm = new TMonom(qm->Coeff, qm->Index);
+            InsCurrent(rm);
+            q.GoNext();
+        }
+        else
+        {
+            if (pm->Index > qm->Index)
+                GoNext();
+            else
             {
-                if (GetMonom()->GetCoeff() == -(q.GetMonom()->GetCoeff()))
-                {
-                    DelCurrent();
+                if (pm->Index == -1)
                     break;
+                pm->Coeff += qm->Coeff;
+                if (pm->Coeff != 0)
+                {
+                    GoNext();
+                    q.GoNext();
                 }
                 else
                 {
-                    GetMonom()->Coeff += q.GetMonom()->Coeff;
-                    break;
+                    DelCurrent();
+                    q.GoNext();
                 }
             }
-
-            if (q.GetMonom()->Index > GetMonom()->Index)
-            {
-                InsCurrent(q.GetMonom());
-                break;
-            }
         }
-        if (!(IsEmpty()) && pCurrLink == pStop)
-            InsLast(q.GetMonom());
     }
     return *this;
 }
@@ -76,6 +77,32 @@ TPolinom& TPolinom::operator=(TPolinom &q)
     }
 
     return *this;
+}
+
+bool TPolinom::operator==(TPolinom& q) {
+    PTMonom pm, qm;
+    Reset();
+    q.Reset();
+    while (true) {
+        pm = GetMonom();
+        qm = q.GetMonom();
+        if (pm->Index != qm->Index)
+            return 0;
+        if (pm->Coeff != qm->Coeff)
+            return 0;
+        if (pm->Coeff != 0 && qm->Coeff == 0 || pm->Coeff == 0 && qm->Coeff != 0)
+            return 0;
+        else {
+            if (pm->Coeff == 0 && qm->Coeff == 0)
+                return 1;
+            GoNext();
+            q.GoNext();
+        }
+    }
+}
+
+bool TPolinom::operator !=(TPolinom& q) {
+    return !(*this == q);
 }
 
 void TPolinom::Print()
