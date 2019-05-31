@@ -20,7 +20,7 @@ public:
     ~TDatList() { DelList(); }
     
     PTDatValue GetDatValue(TLinkPos mode = CURRENT) const; 
-    virtual int IsEmpty()  const { return pFirst == pStop; } 
+    virtual bool IsEmpty() const { return pFirst == pStop; };
     int GetListLength()    const { return ListLen; }       
 
     int SetCurrentPos(int pos);          
