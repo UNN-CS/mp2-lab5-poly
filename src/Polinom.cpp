@@ -87,14 +87,14 @@ bool TPolinom::operator==(TPolinom& q) {
         pm = GetMonom();
         qm = q.GetMonom();
         if (pm->Index != qm->Index)
-            return 0;
+            return false;
         if (pm->Coeff != qm->Coeff)
-            return 0;
+            return false;
         if (pm->Coeff != 0 && qm->Coeff == 0 || pm->Coeff == 0 && qm->Coeff != 0)
-            return 0;
+            return false;
         else {
             if (pm->Coeff == 0 && qm->Coeff == 0)
-                return 1;
+                return true;
             GoNext();
             q.GoNext();
         }
