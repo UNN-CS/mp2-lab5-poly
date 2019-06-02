@@ -76,6 +76,25 @@ TPolinom& TPolinom::operator=(TPolinom &q)
 	return *this;
 }
 
+bool TPolinom::operator==(TPolinom &q)
+{
+	Reset();
+	q.Reset();
+	while (true)
+	{
+		if (IsListEnded() || q.IsListEnded())
+		{
+			if (IsListEnded() && q.IsListEnded())
+				return true;
+			return false;
+		}
+		if (GetMonom() != q.GetMonom())
+			return false;
+		GoNext();
+		q.GoNext();
+	}
+}
+
 std::ostream& operator<<(std::ostream& os, TPolinom& q) {
 	for (q.Reset(); !q.IsListEnded(); q.GoNext())
 		os << "Coeff: " << q.GetMonom()->GetCoeff() << " Index: " << q.GetMonom()->GetIndex() << std::endl;
